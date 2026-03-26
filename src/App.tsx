@@ -570,6 +570,62 @@ const PricingSection = () => {
 };
 
 const LeadForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    experience: 'Student / Fresher'
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      // Using Formspree for direct email delivery
+      // Note: First submission requires email activation from Formspree
+      const response = await fetch("https://formspree.io/f/somildeshmukh@gmail.com", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          experience: formData.experience,
+          _subject: `New Pegasus Lead: ${formData.name}`
+        })
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({ name: '', phone: '', email: '', experience: 'Student / Fresher' });
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        const data = await response.json();
+        if (data.errors) {
+          throw new Error(data.errors.map((error: any) => error.message).join(", "));
+        } else {
+          throw new Error("Form not yet activated. Please check your email (somildeshmukh@gmail.com) for an activation link from Formspree.");
+        }
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert(error instanceof Error ? error.message : "Submission failed. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 bg-white/[0.02]">
       <div className="max-w-7xl mx-auto px-6">
@@ -612,34 +668,101 @@ const LeadForm = () => {
             </div>
           </div>
 
-          <div className="glass p-8 md:p-12 rounded-[40px] border-white/10">
-            <form className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Full Name</label>
-                  <input type="text" placeholder="John Doe" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Phone Number</label>
-                  <input type="tel" placeholder="+91 98765 43210" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Email Address</label>
-                <input type="email" placeholder="john@example.com" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Experience Level</label>
-                <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors appearance-none">
-                  <option className="bg-brand-surface">Student / Fresher</option>
-                  <option className="bg-brand-surface">Working Professional</option>
-                  <option className="bg-brand-surface">Career Switcher</option>
-                </select>
-              </div>
-              <button className="w-full bg-sky-500 hover:bg-sky-600 text-white py-4 rounded-xl text-lg font-bold transition-all shadow-lg shadow-sky-500/20 active:scale-[0.98]">
-                Book Free Demo Class
-              </button>
-            </form>
+          <div className="glass p-8 md:p-12 rounded-[40px] border-white/10 relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              {isSubmitted ? (
+                <motion.div 
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  className="flex flex-col items-center justify-center text-center py-12"
+                >
+                  <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-6">
+                    <CheckCircle2 className="text-green-400 w-10 h-10" />
+                  </div>
+                  <h4 className="text-2xl font-bold text-white mb-4">Request Sent!</h4>
+                  <p className="text-slate-400">
+                    Thank you! We've received your details and will get back to you shortly.
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.form 
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={handleSubmit} 
+                  className="space-y-6"
+                >
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Full Name</label>
+                      <input 
+                        type="text" 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        placeholder="John Doe" 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors" 
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Phone Number</label>
+                      <input 
+                        type="tel" 
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                        placeholder="+91 98765 43210" 
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors" 
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Email Address</label>
+                    <input 
+                      type="email" 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="john@example.com" 
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors" 
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Experience Level</label>
+                    <select 
+                      name="experience"
+                      value={formData.experience}
+                      onChange={handleChange}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors appearance-none"
+                    >
+                      <option className="bg-brand-surface">Student / Fresher</option>
+                      <option className="bg-brand-surface">Working Professional</option>
+                      <option className="bg-brand-surface">Career Switcher</option>
+                    </select>
+                  </div>
+                  <button 
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-sky-500 hover:bg-sky-600 disabled:bg-slate-700 disabled:cursor-not-allowed text-white py-4 rounded-xl text-lg font-bold transition-all shadow-lg shadow-sky-500/20 active:scale-[0.98] flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Book Free Demo Class"
+                    )}
+                  </button>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
