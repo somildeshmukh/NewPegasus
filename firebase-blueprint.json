@@ -1,0 +1,41 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "A potential student who has requested a free demo class.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The full name of the lead."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address of the lead."
+        },
+        "phone": {
+          "type": "string",
+          "description": "The phone number of the lead."
+        },
+        "experience": {
+          "type": "string",
+          "enum": ["Student / Fresher", "Working Professional", "Career Switcher"],
+          "description": "The experience level of the lead."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the lead was created."
+        }
+      },
+      "required": ["name", "email", "phone", "experience", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Collection of demo class requests."
+    }
+  }
+}

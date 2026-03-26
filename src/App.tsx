@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from './firebase';
 import { 
   Database, 
   BarChart3, 
@@ -578,38 +580,22 @@ const LeadForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Using Formspree for direct email delivery
-      // Note: First submission requires email activation from Formspree
-      const response = await fetch("https://formspree.io/f/somildeshmukh@gmail.com", {
-        method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          experience: formData.experience,
-          _subject: `New Pegasus Lead: ${formData.name}`
-        })
+      // Store lead in Firebase Firestore
+      const leadsCollection = collection(db, 'leads');
+      await addDoc(leadsCollection, {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        experience: formData.experience,
+        createdAt: serverTimestamp()
       });
 
-      if (response.ok) {
-        setIsSubmitted(true);
-        setFormData({ name: '', phone: '', email: '', experience: 'Student / Fresher' });
-        setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        const data = await response.json();
-        if (data.errors) {
-          throw new Error(data.errors.map((error: any) => error.message).join(", "));
-        } else {
-          throw new Error("Form not yet activated. Please check your email (somildeshmukh@gmail.com) for an activation link from Formspree.");
-        }
-      }
+      setIsSubmitted(true);
+      setFormData({ name: '', phone: '', email: '', experience: 'Student / Fresher' });
+      setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
       console.error("Submission error:", error);
-      alert(error instanceof Error ? error.message : "Submission failed. Please try again.");
+      alert("Submission failed. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
