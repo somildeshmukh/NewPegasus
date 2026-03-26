@@ -75,9 +75,9 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
-          <button className="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg shadow-sky-500/25 active:scale-95">
+          <a href="#contact" className="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg shadow-sky-500/25 active:scale-95">
             Enroll Now
-          </button>
+          </a>
         </div>
 
         <button 
@@ -108,9 +108,9 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <button className="bg-sky-500 text-white px-6 py-3 rounded-xl font-semibold mt-2">
+              <a href="#contact" className="bg-sky-500 text-white px-6 py-3 rounded-xl font-semibold mt-2 text-center">
                 Enroll Now
-              </button>
+              </a>
             </div>
           </motion.div>
         )}
@@ -149,12 +149,12 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <button className="bg-sky-500 hover:bg-sky-600 text-white px-8 py-4 rounded-full text-lg font-bold transition-all shadow-xl shadow-sky-500/30 flex items-center justify-center gap-2 group">
+              <a href="#contact" className="bg-sky-500 hover:bg-sky-600 text-white px-8 py-4 rounded-full text-lg font-bold transition-all shadow-xl shadow-sky-500/30 flex items-center justify-center gap-2 group">
                 Enroll Now <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="glass hover:bg-white/10 text-white px-8 py-4 rounded-full text-lg font-bold transition-all flex items-center justify-center gap-2">
+              </a>
+              <a href="#contact" className="glass hover:bg-white/10 text-white px-8 py-4 rounded-full text-lg font-bold transition-all flex items-center justify-center gap-2">
                 <PlayCircle className="w-5 h-5 text-sky-400" /> Book Free Demo
-              </button>
+              </a>
             </div>
 
             <div className="grid grid-cols-3 gap-6">
@@ -564,9 +564,9 @@ const PricingSection = () => {
             Get lifetime access to recordings, project source code, and placement assistance.
           </p>
 
-          <button className="w-full bg-white text-brand-dark hover:bg-sky-50 py-5 rounded-2xl text-xl font-bold transition-all shadow-xl active:scale-[0.98] mb-6">
+          <a href="#contact" className="block w-full bg-white text-brand-dark hover:bg-sky-50 py-5 rounded-2xl text-xl font-bold transition-all shadow-xl active:scale-[0.98] mb-6 text-center">
             Enroll Now & Save ₹20,000
-          </button>
+          </a>
           
           <p className="text-xs text-slate-500 font-medium uppercase tracking-widest">
             Only 8 Seats Left for the April Batch
