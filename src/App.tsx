@@ -57,8 +57,13 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass py-3' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-sky-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-sky-500/20">
-            <Zap className="text-white w-6 h-6" />
+          <div className="w-14 h-14 flex items-center justify-center">
+            <img 
+              src="https://lh3.googleusercontent.com/d/18T0qF3qhEwP4864iR5cMZCGgLEQF8fu3" 
+              alt="Pegasus Logo" 
+              className="w-full h-full object-contain"
+              referrerPolicy="no-referrer"
+            />
           </div>
           <span className="text-xl font-bold tracking-tight text-white hidden sm:block">
             PEGASUS <span className="text-sky-400">TECHNOLOGIES</span>
@@ -769,8 +774,13 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-sky-500 rounded flex items-center justify-center">
-                <Zap className="text-white w-5 h-5" />
+              <div className="w-12 h-12 flex items-center justify-center">
+                <img 
+                  src="https://lh3.googleusercontent.com/d/18T0qF3qhEwP4864iR5cMZCGgLEQF8fu3" 
+                  alt="Pegasus Logo" 
+                  className="w-full h-full object-contain"
+                  referrerPolicy="no-referrer"
+                />
               </div>
               <span className="text-xl font-bold text-white">PEGASUS TECHNOLOGIES</span>
             </div>
