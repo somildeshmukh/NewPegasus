@@ -480,41 +480,58 @@ const TrainerSection = () => {
         <div className="glass rounded-[40px] p-8 md:p-16 border-white/10 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-sky-500/10 blur-[100px] -z-10" />
           
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-4 glass px-6 py-3 rounded-full border-white/10 mb-8 shadow-xl">
-              <div className="text-2xl font-bold text-white">18+</div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-sky-400 text-left leading-tight">Years Industry<br/>Experience</div>
-            </div>
-
-            <h2 className="text-sm font-bold text-sky-400 uppercase tracking-[0.2em] mb-4">Meet Your Mentor</h2>
-            <h3 className="text-4xl md:text-6xl font-bold text-white mb-6">Somil Deshmukh</h3>
-            <p className="text-sky-400 font-semibold text-xl md:text-2xl mb-8">Java Architect & AI Specialist</p>
-            
-            <p className="text-slate-400 mb-10 leading-relaxed text-lg md:text-xl">
-              With over 18 years of experience in top MNCs, Somil has architected complex systems and led large-scale AI implementations. He brings a unique blend of deep technical expertise and a passion for teaching.
-            </p>
-
-            <div className="grid md:grid-cols-2 gap-6 mb-12 text-left">
-              {[
-                'Ex-Architect at Top Tier MNCs',
-                'Trained 1000+ Students globally',
-                'Expert in Java, Data Science & Agentic AI',
-                'Passionate about Career Transformation'
-              ].map(item => (
-                <div key={item} className="flex items-center gap-3 text-slate-300 glass p-4 rounded-2xl border-white/5">
-                  <CheckCircle2 className="text-sky-400 w-5 h-5 shrink-0" /> 
-                  <span className="text-sm font-medium">{item}</span>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="relative order-2 lg:order-1">
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative group">
+                <img 
+                  src="https://lh3.googleusercontent.com/d/1keNWU0yoMmZOfW0wZjkfINDaKm55XsLa" 
+                  alt="Somil Deshmukh" 
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-surface/80 via-transparent to-transparent opacity-60" />
+              </div>
+              
+              <div className="absolute -bottom-6 -right-6 glass p-6 rounded-2xl border-white/10 shadow-2xl z-10">
+                <div className="flex items-center gap-4">
+                  <div className="text-4xl font-bold text-white">18+</div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-sky-400 leading-tight">
+                    Years Industry<br/>Experience
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
 
-            <div className="flex justify-center gap-6">
-              <a href="#" className="w-14 h-14 rounded-full glass flex items-center justify-center text-slate-400 hover:text-sky-400 hover:border-sky-400/50 transition-all shadow-lg">
-                <Linkedin className="w-6 h-6" />
-              </a>
-              <a href="#" className="w-14 h-14 rounded-full glass flex items-center justify-center text-slate-400 hover:text-sky-400 hover:border-sky-400/50 transition-all shadow-lg">
-                <Twitter className="w-6 h-6" />
-              </a>
+            <div className="order-1 lg:order-2">
+              <h2 className="text-sm font-bold text-sky-400 uppercase tracking-[0.2em] mb-4">Meet Your Mentor</h2>
+              <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Somil Deshmukh</h3>
+              <p className="text-sky-400 font-semibold text-xl mb-8">Java Architect & AI Specialist</p>
+              
+              <p className="text-slate-400 mb-8 leading-relaxed text-lg">
+                With over 18 years of experience in top MNCs, Somil has architected complex systems and led large-scale AI implementations. He brings a unique blend of deep technical expertise and a passion for teaching.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-4 mb-10">
+                {[
+                  'Ex-Architect at Top Tier MNCs',
+                  'Trained 1000+ Students globally',
+                  'Expert in Java, Data Science & Agentic AI',
+                  'Passionate about Career Transformation'
+                ].map(item => (
+                  <div key={item} className="flex items-center gap-3 text-slate-300 text-sm">
+                    <CheckCircle2 className="text-sky-400 w-5 h-5 shrink-0" /> {item}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex gap-4">
+                <a href="#" className="w-12 h-12 rounded-full glass flex items-center justify-center text-slate-400 hover:text-sky-400 hover:border-sky-400/50 transition-all">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="#" className="w-12 h-12 rounded-full glass flex items-center justify-center text-slate-400 hover:text-sky-400 hover:border-sky-400/50 transition-all">
+                  <Twitter className="w-5 h-5" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
