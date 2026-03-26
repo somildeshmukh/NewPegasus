@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import somilProfile from './assets/somil.jpg';
 import { 
   Database, 
   BarChart3, 
@@ -482,10 +483,9 @@ const TrainerSection = () => {
             <div className="relative">
               <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-white/10">
                 <img 
-                  src={`${import.meta.env.BASE_URL}somil.jpg`} 
+                  src={somilProfile} 
                   alt="Somil Deshmukh" 
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                  referrerPolicy="no-referrer"
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 glass p-6 rounded-2xl border-white/10 shadow-2xl">
